@@ -22,7 +22,7 @@ include(${CPM_DOWNLOAD_LOCATION})
 CPMAddPackage(
   NAME namagic_enum
   GITHUB_REPOSITORY sthagen/magic_enum
-  GIT_TAG 2021.09
+  GIT_TAG v0.7.3
 )
 
 CPMAddPackage(
