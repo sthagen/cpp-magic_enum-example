@@ -52,7 +52,7 @@ $ ninja -C build test
 
 ninja: Entering directory `build'
 [0/1] Running tests...
-Test project /Users/ruth/d/gh/sha/cpp-magic_enum-example/build
+Test project /here_below/cpp-magic_enum-example/build
     Start 1: magic_enum_example
 1/2 Test #1: magic_enum_example ...............   Passed    0.00 sec
     Start 2: basic
