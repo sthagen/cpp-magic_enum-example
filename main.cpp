@@ -137,19 +137,36 @@ TEST_CASE("Enum value sequence.") {
     constexpr auto& values = magic_enum::enum_values<Color>();
     using namespace magic_enum::ostream_operators;
     std::ostringstream os;
-    os << "Colors values:";
     for (const auto& c : values) os << " " << c;
-    REQUIRE(os.str() == "Colors values: RED BLUE GREEN");
+    REQUIRE(os.str() == " RED BLUE GREEN");
+}
+
+TEST_CASE("Support operators.") {
+    /* Example snippet:
+     *
+     * enum class Flags { A = 1, B = 2, C = 4, D = 8 };
+     * using namespace magic_enum::bitwise_operators; // out-of-the-box bitwise operators for all enums.
+     * // Support operators: ~, |, &, ^, |=, &=, ^=.
+     * Flags flag = Flags::A | Flags::C;
+     * std::cout << flag << std::endl; // 5
+     */
+    enum class Flags { A = 1, B = 2, C = 4, D = 8 };
+    using namespace magic_enum::bitwise_operators;
+    Flags flag = Flags::A | Flags::C;
+    CHECK(static_cast<int>(flag) == 5);
+    CHECK(static_cast<int>(~Flags::A) == -2);
+    CHECK(static_cast<int>(Flags::A & Flags::C) == 0);
+    flag |= Flags::D;
+    CHECK(static_cast<int>(flag) == 13);
+    flag &= Flags::B;
+    CHECK(static_cast<int>(flag) == 0);
+    flag ^= Flags::C;
+    CHECK(static_cast<int>(flag) == 4);
 }
 
 /*
 int transform_these_main_() {
 
-  enum class Flags { A = 1, B = 2, C = 4, D = 8 };
-  using namespace magic_enum::bitwise_operators; // out-of-the-box bitwise operators for all enums.
-  // Support operators: ~, |, &, ^, |=, &=, ^=.
-  Flags flag = Flags::A | Flags::C;
-  // std::cout << flag << std::endl; // 5
 
   enum color { red, green, blue };
 
