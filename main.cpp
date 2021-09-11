@@ -76,6 +76,17 @@ TEST_CASE("Integer value to enum value.") {
     REQUIRE(magic_enum::enum_integer(c3.value()) == 10);
 }
 
+TEST_CASE("Integer value to enum value.") {
+    /* Example snippet:
+     *
+     * // Enum value to integer value.
+     * auto c4_integer = magic_enum::enum_integer(Color::RED);
+     * std::cout << "RED = " << c4_integer << std::endl; // RED = -10
+     */
+    auto c4_integer = magic_enum::enum_integer(Color::RED);
+    REQUIRE(c4_integer == -10);
+}
+
 /*
 int transform_these_main_() {
 
