@@ -1,6 +1,9 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <array>
+#include <string>
 
 #include <doctest/doctest.h>
+
 #include <magic_enum.hpp>
 
 enum class Color : int { RED = -10, BLUE = 0, GREEN = 10 };
@@ -12,17 +15,23 @@ auto to_integer(magic_enum::Enum<E> value) {
 }
 
 
-TEST_CASE("Enum variable to string name") {
+TEST_CASE("Enum variable to string name.") {
     Color c1 = Color::RED;
     REQUIRE(magic_enum::enum_name(c1) == "RED");
 }
 
+TEST_CASE("String enum name sequence.") {
+    constexpr auto& names = magic_enum::enum_names<Color>();
+    std::array<const std::string, 3> const seq{"RED", "BLUE", "GREEN"};
+    auto index = 0;
+    for (const auto& n : names) {
+        if (n != "RED" and n != "BLUE" && n != "GREEN") FAIL("Unexpected color name");
+        CHECK(n == seq[index++]);
+    }
+}
+
 /*
 int transform_these_main_() {
-  // Enum variable to string name.
-  Color c1 = Color::RED;
-  auto c1_name = magic_enum::enum_name(c1);
-  // std::cout << c1_name << std::endl; // RED
 
   // String enum name sequence.
   constexpr auto& names = magic_enum::enum_names<Color>();
