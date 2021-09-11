@@ -104,11 +104,17 @@ TEST_CASE("Ostream operator for enum.") {
     REQUIRE(os.str() == "Color: RED BLUE GREEN");
 }
 
+TEST_CASE("Number of enum values.") {
+    /* Example snippet:
+     *
+     * // Number of enum values.
+     * std::cout << "Color enum size: " << magic_enum::enum_count<Color>() << std::endl; // Color size: 3
+     */
+     REQUIRE(magic_enum::enum_count<Color>() == 3);
+}
+
 /*
 int transform_these_main_() {
-
-  // Number of enum values.
-  // std::cout << "Color enum size: " << magic_enum::enum_count<Color>() << std::endl; // Color size: 3
 
   // Indexed access to enum value.
   // std::cout << "Color[0] = " << magic_enum::enum_value<Color>(0) << std::endl; // Color[0] = RED
