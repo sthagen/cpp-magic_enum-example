@@ -33,9 +33,6 @@ CPMAddPackage(
   GIT_TAG 2020.12
 )
 
-set(include_dest "include")
-set(tool_dest "bin")
-
 # ---- Create binary ----
 
 add_executable(magic_enum_test main.cpp)
@@ -49,12 +46,13 @@ add_test(magic_enum_example magic_enum_test)
 
 # ---- Create the examples ----
 
+message(STATUS "Note the fetched includes are taken from below: ${FETCHCONTENT_BASE_DIR}")
 if (MAGIC_ENUM_EXAMPLES)
     macro(magic_enum_examples EXAMPLENAME)
         add_executable(${EXAMPLENAME} ${ARGN})
         set_target_properties(${EXAMPLENAME} PROPERTIES FOLDER examples)
         set_target_properties(${EXAMPLENAME} PROPERTIES CXX_STANDARD 17)
-        target_include_directories(${EXAMPLENAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+        target_include_directories(${EXAMPLENAME} PUBLIC "${FETCHCONTENT_BASE_DIR}/magic_enum-src/include/")
         add_test(NAME ${EXAMPLENAME} COMMAND ${EXAMPLENAME})
     endmacro()
     add_subdirectory(examples)
