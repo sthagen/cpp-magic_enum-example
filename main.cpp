@@ -122,17 +122,28 @@ TEST_CASE("Indexed access to enum value.") {
      REQUIRE(magic_enum::enum_value<Color>(0) == Color::RED);
 }
 
+TEST_CASE("Enum value sequence.") {
+    /* Example snippet:
+     *
+     * // Enum value sequence.
+     * constexpr auto& values = magic_enum::enum_values<Color>();
+     * std::cout << "Colors values:";
+     * for (const auto& c : values) {
+     *   std::cout << " " << c; // Ostream operator for enum.
+     * }
+     * std::cout << std::endl;
+     * // Color sequence: RED BLUE GREEN
+     */
+    constexpr auto& values = magic_enum::enum_values<Color>();
+    using namespace magic_enum::ostream_operators;
+    std::ostringstream os;
+    os << "Colors values:";
+    for (const auto& c : values) os << " " << c;
+    REQUIRE(os.str() == "Colors values: RED BLUE GREEN");
+}
+
 /*
 int transform_these_main_() {
-
-  // Enum value sequence.
-  constexpr auto& values = magic_enum::enum_values<Color>();
-  // std::cout << "Colors values:";
-  for (const auto& c : values) {
-    // std::cout << " " << c; // Ostream operator for enum.
-  }
-  // std::cout << std::endl;
-  // Color sequence: RED BLUE GREEN
 
   enum class Flags { A = 1, B = 2, C = 4, D = 8 };
   using namespace magic_enum::bitwise_operators; // out-of-the-box bitwise operators for all enums.
