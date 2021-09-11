@@ -113,11 +113,17 @@ TEST_CASE("Number of enum values.") {
      REQUIRE(magic_enum::enum_count<Color>() == 3);
 }
 
+TEST_CASE("Indexed access to enum value.") {
+    /* Example snippet:
+     *
+     * // Indexed access to enum value.
+     * std::cout << "Color[0] = " << magic_enum::enum_value<Color>(0) << std::endl; // Color[0] = RED
+     */
+     REQUIRE(magic_enum::enum_value<Color>(0) == Color::RED);
+}
+
 /*
 int transform_these_main_() {
-
-  // Indexed access to enum value.
-  // std::cout << "Color[0] = " << magic_enum::enum_value<Color>(0) << std::endl; // Color[0] = RED
 
   // Enum value sequence.
   constexpr auto& values = magic_enum::enum_values<Color>();
