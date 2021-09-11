@@ -48,14 +48,22 @@ TEST_CASE("String enum name sequence.") {
     }
 }
 
+TEST_CASE("String name to enum value.") {
+    /* Example snippet:
+     *
+     * // String name to enum value.
+     * auto c2 = magic_enum::enum_cast<Color>("BLUE");
+     * if (c2.has_value()) {
+     *   std::cout << "BLUE = " << to_integer(c2.value()) << std::endl; // BLUE = 0
+     * }
+     */
+    auto c2 = magic_enum::enum_cast<Color>("BLUE");
+    CHECK(c2.has_value());
+    REQUIRE(to_integer(c2.value()) == 0);
+}
+
 /*
 int transform_these_main_() {
-
-  // String name to enum value.
-  auto c2 = magic_enum::enum_cast<Color>("BLUE");
-  if (c2.has_value()) {
-    // std::cout << "BLUE = " << to_integer(c2.value()) << std::endl; // BLUE = 0
-  }
 
   // Integer value to enum value.
   auto c3 = magic_enum::enum_cast<Color>(10);
