@@ -20,7 +20,7 @@ include(${CPM_DOWNLOAD_LOCATION})
 # See https://github.com/TheLartians/CPM.cmake for details and examples
 
 CPMAddPackage(
-  NAME namagic_enum
+  NAME magic_enum
   GITHUB_REPOSITORY sthagen/magic_enum
   GIT_TAG v0.7.3
 )
@@ -34,7 +34,7 @@ CPMAddPackage(
 # ---- Create binary ----
 
 add_executable(magic_enum_example main.cpp)
-target_link_libraries(magic_enum_example doctest)
+target_link_libraries(magic_enum_example doctest magic_enum)
 set_target_properties(magic_enum_example PROPERTIES CXX_STANDARD 17)
 
 # ---- Enable testing ----

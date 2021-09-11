@@ -17,7 +17,8 @@ TEST_CASE("Enum variable to string name") {
     REQUIRE(magic_enum::enum_name(c1) == "RED");
 }
 
-int _transform_these_main() {
+/*
+int transform_these_main_() {
   // Enum variable to string name.
   Color c1 = Color::RED;
   auto c1_name = magic_enum::enum_name(c1);
@@ -87,18 +88,18 @@ int _transform_these_main() {
 
   return 0;
 }
-
+*/
 TEST_CASE("Enum pair (value enum, string enum name) sequence.") {
     constexpr auto& entries = magic_enum::enum_entries<Color>();
     for (const auto& e : entries) {
         auto label = e.second;
         auto value = static_cast<int>(e.first);
         INFO("Color entry: ", label, " = ", value);
-        switch value {
+        switch (value) {
             case -10: CHECK(label == "RED");   break;
             case   0: CHECK(label == "BLUE");  break;
             case  10: CHECK(label == "GREEN"); break;
+            default: FAIL("Unknown value");
         }
-        REQUIRE( value == -10 or value == 0 or value == 10);
     }
 }
