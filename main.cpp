@@ -16,11 +16,29 @@ auto to_integer(magic_enum::Enum<E> value) {
 
 
 TEST_CASE("Enum variable to string name.") {
+    /* Example snippet:
+     *
+     * // Enum variable to string name.
+     * Color c1 = Color::RED;
+     * auto c1_name = magic_enum::enum_name(c1);
+     * std::cout << c1_name << std::endl; // RED
+     */
     Color c1 = Color::RED;
     REQUIRE(magic_enum::enum_name(c1) == "RED");
 }
 
 TEST_CASE("String enum name sequence.") {
+    /* Example snippet:
+     *
+     * // String enum name sequence.
+     * constexpr auto& names = magic_enum::enum_names<Color>();
+     * std::cout << "Color names:";
+     * for (const auto& n : names) {
+     *   std::cout << " " << n;
+     * }
+     * std::cout << std::endl;
+     * // Color names: RED BLUE GREEN
+    */
     constexpr auto& names = magic_enum::enum_names<Color>();
     std::array<const std::string, 3> const seq{"RED", "BLUE", "GREEN"};
     auto index = 0;
@@ -99,6 +117,17 @@ int transform_these_main_() {
 }
 */
 TEST_CASE("Enum pair (value enum, string enum name) sequence.") {
+    /* Example snippet:
+     * // Enum pair (value enum, string enum name) sequence.
+     * constexpr auto& entries = magic_enum::enum_entries<Color>();
+     * std::cout << "Colors entries:";
+     * for (const auto& e : entries) {
+     *   std::cout << " "  << e.second << " = " << static_cast<int>(e.first);
+     * }
+     * std::cout << std::endl;
+     * // Color entries: RED = -10 BLUE = 0 GREEN = 10
+
+    */
     constexpr auto& entries = magic_enum::enum_entries<Color>();
     for (const auto& e : entries) {
         auto label = e.second;
