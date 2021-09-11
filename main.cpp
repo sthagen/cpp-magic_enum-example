@@ -62,14 +62,22 @@ TEST_CASE("String name to enum value.") {
     REQUIRE(to_integer(c2.value()) == 0);
 }
 
+TEST_CASE("Integer value to enum value.") {
+    /* Example snippet:
+     *
+     * // Integer value to enum value.
+     * auto c3 = magic_enum::enum_cast<Color>(10);
+     * if (c3.has_value()) {
+     *   std::cout << "GREEN = " << magic_enum::enum_integer(c3.value()) << std::endl; // GREEN = 10
+     * }
+     */
+    auto c3 = magic_enum::enum_cast<Color>(10);
+    CHECK(c3.has_value());
+    REQUIRE(magic_enum::enum_integer(c3.value()) == 10);
+}
+
 /*
 int transform_these_main_() {
-
-  // Integer value to enum value.
-  auto c3 = magic_enum::enum_cast<Color>(10);
-  if (c3.has_value()) {
-    // std::cout << "GREEN = " << magic_enum::enum_integer(c3.value()) << std::endl; // GREEN = 10
-  }
 
   // Enum value to integer value.
   auto c4_integer = magic_enum::enum_integer(Color::RED);
