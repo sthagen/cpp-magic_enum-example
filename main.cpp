@@ -51,15 +51,6 @@ TEST_CASE("String enum name sequence.") {
 /*
 int transform_these_main_() {
 
-  // String enum name sequence.
-  constexpr auto& names = magic_enum::enum_names<Color>();
-  // std::cout << "Color names:";
-  for (const auto& n : names) {
-    // std::cout << " " << n;
-  }
-  // std::cout << std::endl;
-  // Color names: RED BLUE GREEN
-
   // String name to enum value.
   auto c2 = magic_enum::enum_cast<Color>("BLUE");
   if (c2.has_value()) {
