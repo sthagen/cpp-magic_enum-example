@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
 project(magic_enum_example LANGUAGES CXX)
 
+option(MAGIC_ENUM_EXAMPLES "whether or not to build the examples" ON)
+
 # ---- Fetch CPM ----
 
 set(CPM_DOWNLOAD_VERSION 0.27.2)
@@ -31,13 +33,29 @@ CPMAddPackage(
   GIT_TAG 2020.12
 )
 
+set(include_dest "include")
+set(tool_dest "bin")
+
 # ---- Create binary ----
 
-add_executable(magic_enum_example main.cpp)
-target_link_libraries(magic_enum_example doctest magic_enum)
-set_target_properties(magic_enum_example PROPERTIES CXX_STANDARD 17)
+add_executable(magic_enum_test main.cpp)
+target_link_libraries(magic_enum_test doctest magic_enum)
+set_target_properties(magic_enum_test PROPERTIES CXX_STANDARD 17)
 
 # ---- Enable testing ----
 
 enable_testing() 
-add_test(magic_enum_example magic_enum_example)
+add_test(magic_enum_example magic_enum_test)
+
+# ---- Create the examples ----
+
+if (MAGIC_ENUM_EXAMPLES)
+    macro(magic_enum_examples EXAMPLENAME)
+        add_executable(${EXAMPLENAME} ${ARGN})
+        set_target_properties(${EXAMPLENAME} PROPERTIES FOLDER examples)
+        set_target_properties(${EXAMPLENAME} PROPERTIES CXX_STANDARD 17)
+        target_include_directories(${EXAMPLENAME} PUBLIC ${CMAKE_CURRENT_BINARY_DIR})
+        add_test(NAME ${EXAMPLENAME} COMMAND ${EXAMPLENAME})
+    endmacro()
+    add_subdirectory(examples)
+endif()
