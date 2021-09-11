@@ -1,6 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <array>
 #include <string>
+#include <sstream>
 
 #include <doctest/doctest.h>
 
@@ -87,16 +88,24 @@ TEST_CASE("Integer value to enum value.") {
     REQUIRE(c4_integer == -10);
 }
 
+TEST_CASE("Ostream operator for enum.") {
+    /* Example snippet:
+     *
+     * using namespace magic_enum::ostream_operators; // out-of-the-box ostream operator for all enums.
+     * // Ostream operator for enum.
+     * std::cout << "Color: " << c1 << " " << c2 << " " << c3 << std::endl; // Color: RED BLUE GREEN
+     */
+    Color c1 = Color::RED;
+    auto c2 = magic_enum::enum_cast<Color>("BLUE");
+    auto c3 = magic_enum::enum_cast<Color>(10);
+    using namespace magic_enum::ostream_operators;
+    std::ostringstream os;
+    os << "Color: " << c1 << " " << c2 << " " << c3;
+    REQUIRE(os.str() == "Color: RED BLUE GREEN");
+}
+
 /*
 int transform_these_main_() {
-
-  // Enum value to integer value.
-  auto c4_integer = magic_enum::enum_integer(Color::RED);
-  // std::cout << "RED = " << c4_integer << std::endl; // RED = -10
-
-  using namespace magic_enum::ostream_operators; // out-of-the-box ostream operator for all enums.
-  // Ostream operator for enum.
-  // std::cout << "Color: " << c1 << " " << c2 << " " << c3 << std::endl; // Color: RED BLUE GREEN
 
   // Number of enum values.
   // std::cout << "Color enum size: " << magic_enum::enum_count<Color>() << std::endl; // Color size: 3
