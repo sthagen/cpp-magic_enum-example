@@ -10,7 +10,7 @@ $ git clone https://github.com/sthagen/cpp-magic_enum-example.git
 
 ## Development Cycle
 
-The subsections use `ninja` as build system and the build type `Release` but other build systems should equally work.
+The examples use `ninja` as build system and the build type `Release` but other build systems should equally work.
 
 ### Build
 
