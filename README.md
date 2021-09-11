@@ -8,17 +8,64 @@ Experimental example for magic_enum C++ library per CMake package management.
 $ git clone https://github.com/sthagen/cpp-magic_enum-example.git
 ```
 
-## Build
+## Development Cycle
 
+The subsections use `ninja` as build system and the build type `Release` but other build systems should equally work.
+
+### Build
+
+Commands:
 ```bash
 $ cd cpp-magic_enum-example
 $ cmake -DCMAKE_BUILD_TYPE=Release -GNinja -B build .
-$ cmake --build build
+$ ninja -C build
 ```
 
-## Execute
+Example build (assuming a macos machine and the git clone directory below `/here_below/`:
+```bash
+$ cd cpp-magic_enum-example
+$ cmake -DCMAKE_BUILD_TYPE=Release -GNinja -B build .
+cmake -DCMAKE_BUILD_TYPE=Release -GNinja -B build .
+-- The CXX compiler identification is AppleClang 12.0.5.12050022
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Library/Developer/CommandLineTools/usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Downloading CPM.cmake v0.27.2
+-- CPM: adding package magic_enum@0.7.3 (v0.7.3)
+-- CPM: adding package doctest@2020.12 (2020.12)
+-- Note the fetched includes are taken from below: /here_below/cpp-magic_enum-example/build/_deps
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /here_below/cpp-magic_enum-example/build
+$ ninja -C build
+ninja -C build
+ninja: Entering directory `build'
+[4/4] Linking CXX executable magic_enum_test
+```
 
-Example run of the test:
+### Test
+
+```bash
+$ ninja -C build test
+
+ninja: Entering directory `build'
+[0/1] Running tests...
+Test project /Users/ruth/d/gh/sha/cpp-magic_enum-example/build
+    Start 1: magic_enum_example
+1/2 Test #1: magic_enum_example ...............   Passed    0.00 sec
+    Start 2: basic
+2/2 Test #2: basic ............................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   0.01 sec
+```
+
+### Execute
+
+Direct execution of the explicit test (only):
 ```bash
 $ build/magic_enum_test
 
@@ -30,7 +77,7 @@ $ build/magic_enum_test
 [doctest] Status: SUCCESS!
 ```
 
-Example run of the basic example app:
+Direct execution of the basic example app:
 ```bash
 $ build/examples/basic
 
@@ -45,6 +92,16 @@ Color[0] = RED
 Colors values: RED BLUE GREEN
 5
 Colors entries: RED = -10 BLUE = 0 GREEN = 10
+```
+
+### Clean
+
+```bash
+$ ninja -C build clean
+
+ninja: Entering directory `build'
+[1/1] Cleaning all built files...
+Cleaning... 4 files.
 ```
 
 ## Status
