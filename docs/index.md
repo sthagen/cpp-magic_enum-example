@@ -49,18 +49,20 @@ ninja: Entering directory `build'
 
 ```bash
 $ ninja -C build test
-
+ninja -C build test
 ninja: Entering directory `build'
 [0/1] Running tests...
 Test project /here_below/cpp-magic_enum-example/build
     Start 1: magic_enum_example
-1/2 Test #1: magic_enum_example ...............   Passed    0.00 sec
+1/3 Test #1: magic_enum_example ...............   Passed    0.40 sec
     Start 2: basic
-2/2 Test #2: basic ............................   Passed    0.00 sec
+2/3 Test #2: basic ............................   Passed    0.20 sec
+    Start 3: custom_name
+3/3 Test #3: custom_name ......................   Passed    0.15 sec
 
-100% tests passed, 0 tests failed out of 2
+100% tests passed, 0 tests failed out of 3
 
-Total Test time (real) =   0.01 sec
+Total Test time (real) =   0.76 sec
 ```
 
 ### Execute
@@ -92,6 +94,18 @@ Color[0] = RED
 Colors values: RED BLUE GREEN
 5
 Colors entries: RED = -10 BLUE = 0 GREEN = 10
+```
+Direct execution of the custom_name example app:
+```bash
+$ build/examples/custom_name
+
+the red color
+The BLUE
+GREEN
+true
+the one
+Two
+Three
 ```
 
 ### Clean
